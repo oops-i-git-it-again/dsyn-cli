@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Entities />
+  <Roles />
+  <Workflows />
+  <FieldSecurityProfiles />
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <CustomControls />
+  <EntityDataProviders />
+  <msdyn_exporttodatalakeconfigs>
+    <msdyn_exporttodatalakeconfig msdyn_exporttodatalakeconfigid="653ae937-c02f-ed11-9db1-0022482dfdbf">
+      <iscustomizable>1</iscustomizable>
+      <msdyn_name />
+      <msdyn_schema />
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </msdyn_exporttodatalakeconfig>
+  </msdyn_exporttodatalakeconfigs>
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>
