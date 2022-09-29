@@ -7,6 +7,7 @@ const { serializeXml } = require("./serializeXml");
 module.exports = function unpackSynapse(customizationsXml) {
   const dom = parseXml(customizationsXml);
   const configNode = selectConfigNode(dom);
+  const configId = configNode.getAttribute("msdyn_exporttodatalakeconfigid");
   const nameNode = selectNameNode(configNode);
   nameNode.removeChild(nameNode.firstChild);
   const jsonNode = selectSchemaNode(configNode);
@@ -27,7 +28,7 @@ module.exports = function unpackSynapse(customizationsXml) {
   delete synapseConfig.FileEndpoint;
   delete synapseConfig.FileSystemEndpoint;
   delete synapseConfig.SqlODEndpoint;
-  const unpackedEnvironmentJson = {
+  const environmentConfig = {
     ResourceGroupName: resourceGroupName,
     SubscriptionId: subscriptionId,
     StorageAccountName: storageAccountName,
@@ -36,7 +37,7 @@ module.exports = function unpackSynapse(customizationsXml) {
     synapseConfig.IncludeWorkspace = false;
   } else {
     synapseConfig.IncludeWorkspace = true;
-    unpackedEnvironmentJson.WorkspaceName = new URL(
+    environmentConfig.WorkspaceName = new URL(
       synapseConfig.WorkspaceDevEndpoint
     ).hostname.split(".")[0];
   }
@@ -44,7 +45,7 @@ module.exports = function unpackSynapse(customizationsXml) {
   const unpackedXml = serializeXml(dom);
   return {
     unpackedXml,
-    unpackedConfigJson: synapseConfig,
-    unpackedEnvironmentJson,
+    unpackedConfigJson: { [configId]: synapseConfig },
+    unpackedEnvironmentJson: { [configId]: environmentConfig },
   };
 };
