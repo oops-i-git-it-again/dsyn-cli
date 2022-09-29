@@ -8,6 +8,8 @@ describe("packSynapse", () => {
     testPackSynapse("single-config-with-synapse"));
   test("combines single synapse link configuration without synapse workspace into solution", () =>
     testPackSynapse("single-config-without-synapse"));
+  test("combines multiple synpase link configurations into solution", () =>
+    testPackSynapse("multiple-configs"));
 });
 
 async function testPackSynapse(testName) {

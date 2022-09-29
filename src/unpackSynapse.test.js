@@ -8,8 +8,8 @@ describe("unpackSynapse", () => {
     testUnpackSynapse("single-config-with-synapse"));
   test("splits single synapse link configuration without synapse workspace from solution", () =>
     testUnpackSynapse("single-config-without-synapse"));
-
-  // TODO: support multiple synapse configs
+  test("splits multiple synpase link configurations from solution", () =>
+    testUnpackSynapse("multiple-configs"));
   // TODO: support 0 synapse configs
 });
 
