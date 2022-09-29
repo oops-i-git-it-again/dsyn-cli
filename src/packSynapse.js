@@ -1,3 +1,4 @@
+const { getConfigId } = require("./getConfigId");
 const { parseXml } = require("./parseXml");
 const { selectConfigNode } = require("./selectConfigNode");
 const { selectNameNode } = require("./selectNameNode");
@@ -11,26 +12,29 @@ function packSynapse({
 }) {
   const dom = parseXml(unpackedXml);
   const configNode = selectConfigNode(dom);
+  const configId = getConfigId(configNode);
+  const environmentConfig = unpackedEnvironmentJson[configId];
+  const synapseConfig = unpackedConfigJson[configId];
   const nameNode = selectNameNode(configNode);
-  nameNode.textContent = unpackedEnvironmentJson.StorageAccountName;
+  nameNode.textContent = environmentConfig.StorageAccountName;
   const schemaJson = {};
-  schemaJson.SubscriptionId = unpackedEnvironmentJson.SubscriptionId;
-  schemaJson.ResourceGroupName = unpackedEnvironmentJson.ResourceGroupName;
-  schemaJson.StorageAccountName = unpackedEnvironmentJson.StorageAccountName;
-  schemaJson.BlobEndpoint = `https://${unpackedEnvironmentJson.StorageAccountName}.blob.core.windows.net/`;
-  schemaJson.QueueEndpoint = `https://${unpackedEnvironmentJson.StorageAccountName}.queue.core.windows.net/`;
-  schemaJson.TableEndpoint = `https://${unpackedEnvironmentJson.StorageAccountName}.table.core.windows.net/`;
-  schemaJson.FileEndpoint = `https://${unpackedEnvironmentJson.StorageAccountName}.file.core.windows.net/`;
-  schemaJson.FileSystemEndpoint = `https://${unpackedEnvironmentJson.StorageAccountName}.dfs.core.windows.net/`;
-  if (unpackedConfigJson.IncludeWorkspace) {
-    schemaJson.SqlODEndpoint = `${unpackedEnvironmentJson.WorkspaceName}-ondemand.sql.azuresynapse.net`;
-    schemaJson.WorkspaceDevEndpoint = `https://${unpackedEnvironmentJson.WorkspaceName}.dev.azuresynapse.net`;
+  schemaJson.SubscriptionId = environmentConfig.SubscriptionId;
+  schemaJson.ResourceGroupName = environmentConfig.ResourceGroupName;
+  schemaJson.StorageAccountName = environmentConfig.StorageAccountName;
+  schemaJson.BlobEndpoint = `https://${environmentConfig.StorageAccountName}.blob.core.windows.net/`;
+  schemaJson.QueueEndpoint = `https://${environmentConfig.StorageAccountName}.queue.core.windows.net/`;
+  schemaJson.TableEndpoint = `https://${environmentConfig.StorageAccountName}.table.core.windows.net/`;
+  schemaJson.FileEndpoint = `https://${environmentConfig.StorageAccountName}.file.core.windows.net/`;
+  schemaJson.FileSystemEndpoint = `https://${environmentConfig.StorageAccountName}.dfs.core.windows.net/`;
+  if (synapseConfig.IncludeWorkspace) {
+    schemaJson.SqlODEndpoint = `${environmentConfig.WorkspaceName}-ondemand.sql.azuresynapse.net`;
+    schemaJson.WorkspaceDevEndpoint = `https://${environmentConfig.WorkspaceName}.dev.azuresynapse.net`;
   } else {
     schemaJson.SqlODEndpoint = "";
     schemaJson.WorkspaceDevEndpoint = "";
   }
 
-  Object.assign(schemaJson, unpackedConfigJson);
+  Object.assign(schemaJson, synapseConfig);
   delete schemaJson.IncludeWorkspace;
   const schemaNode = selectSchemaNode(configNode);
   schemaNode.textContent = JSON.stringify(schemaJson);

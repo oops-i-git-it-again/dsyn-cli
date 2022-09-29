@@ -1,3 +1,4 @@
+const { getConfigId } = require("./getConfigId");
 const { parseXml } = require("./parseXml");
 const { selectConfigNode } = require("./selectConfigNode");
 const { selectNameNode } = require("./selectNameNode");
@@ -7,7 +8,7 @@ const { serializeXml } = require("./serializeXml");
 module.exports = function unpackSynapse(customizationsXml) {
   const dom = parseXml(customizationsXml);
   const configNode = selectConfigNode(dom);
-  const configId = configNode.getAttribute("msdyn_exporttodatalakeconfigid");
+  const configId = getConfigId(configNode);
   const nameNode = selectNameNode(configNode);
   nameNode.removeChild(nameNode.firstChild);
   const jsonNode = selectSchemaNode(configNode);
