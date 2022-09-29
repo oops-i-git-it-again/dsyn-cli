@@ -1,6 +1,6 @@
 const { getConfigId } = require("./getConfigId");
 const { parseXml } = require("./parseXml");
-const { selectConfigNode } = require("./selectConfigNode");
+const { selectConfigNode } = require("./selectConfigNodes");
 const { selectNameNode } = require("./selectNameNode");
 const { selectSchemaNode } = require("./selectSchemaNode");
 const { serializeXml } = require("./serializeXml");
