@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/cli.js",
   "scripts": {
+    "develop": "jest --watch",
     "build": "rollup --config",
     "lint": "eslint src",
     "start": "node src/cli.js",

@@ -4,14 +4,14 @@ const { getTestFiles } = require("./getTestFiles");
 const unpackSynapse = require("./unpackSynapse.js");
 
 describe("unpackSynapse", () => {
-  test("splits synapse customizations from solution", async () => {
+  test("splits single synapse link configuration with synapse workspace from solution", async () => {
     //  Arrange
     const {
       packedXml,
       unpackedXml,
       unpackedConfigJson,
       unpackedEnvironmentJson,
-    } = await getTestFiles();
+    } = await getTestFiles("single-config-with-synapse");
 
     //  Act
     const output = unpackSynapse(packedXml);
