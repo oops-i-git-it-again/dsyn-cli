@@ -25,6 +25,7 @@ function packSynapse({
   schemaJson.SqlODEndpoint = `${unpackedEnvironmentJson.WorkspaceName}-ondemand.sql.azuresynapse.net`;
   schemaJson.WorkspaceDevEndpoint = `https://${unpackedEnvironmentJson.WorkspaceName}.dev.azuresynapse.net`;
   Object.assign(schemaJson, unpackedConfigJson);
+  delete schemaJson.IncludeWorkspace;
   const schemaNode = selectSchemaNode(configNode);
   schemaNode.textContent = JSON.stringify(schemaJson);
   return serializeXml(dom);

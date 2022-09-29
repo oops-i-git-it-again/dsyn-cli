@@ -1,5 +1,5 @@
 {
-  "IncludesSynapse": true,
+  "IncludeWorkspace": true,
   "Entities": [
     {
       "Type": "account",
