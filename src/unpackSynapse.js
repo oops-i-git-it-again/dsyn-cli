@@ -11,7 +11,7 @@ module.exports = function unpackSynapse(customizationsXml) {
   nameNode.removeChild(nameNode.firstChild);
   const jsonNode = selectSchemaNode(configNode);
   const synapseConfig = Object.assign(
-    { IncludeWorkspace: true },
+    { IncludeWorkspace: null },
     JSON.parse(jsonNode.textContent)
   );
   jsonNode.removeChild(jsonNode.firstChild);
@@ -27,19 +27,24 @@ module.exports = function unpackSynapse(customizationsXml) {
   delete synapseConfig.FileEndpoint;
   delete synapseConfig.FileSystemEndpoint;
   delete synapseConfig.SqlODEndpoint;
-  const workspaceName = new URL(
-    synapseConfig.WorkspaceDevEndpoint
-  ).hostname.split(".")[0];
+  const unpackedEnvironmentJson = {
+    ResourceGroupName: resourceGroupName,
+    SubscriptionId: subscriptionId,
+    StorageAccountName: storageAccountName,
+  };
+  if (synapseConfig.WorkspaceDevEndpoint === "") {
+    synapseConfig.IncludeWorkspace = false;
+  } else {
+    synapseConfig.IncludeWorkspace = true;
+    unpackedEnvironmentJson.WorkspaceName = new URL(
+      synapseConfig.WorkspaceDevEndpoint
+    ).hostname.split(".")[0];
+  }
   delete synapseConfig.WorkspaceDevEndpoint;
   const unpackedXml = serializeXml(dom);
   return {
     unpackedXml,
     unpackedConfigJson: synapseConfig,
-    unpackedEnvironmentJson: {
-      WorkspaceName: workspaceName,
-      ResourceGroupName: resourceGroupName,
-      SubscriptionId: subscriptionId,
-      StorageAccountName: storageAccountName,
-    },
+    unpackedEnvironmentJson,
   };
 };
