@@ -10,7 +10,10 @@ module.exports = function unpackSynapse(customizationsXml) {
   const nameNode = selectNameNode(configNode);
   nameNode.removeChild(nameNode.firstChild);
   const jsonNode = selectSchemaNode(configNode);
-  const synapseConfig = JSON.parse(jsonNode.textContent);
+  const synapseConfig = Object.assign(
+    { IncludeWorkspace: true },
+    JSON.parse(jsonNode.textContent)
+  );
   jsonNode.removeChild(jsonNode.firstChild);
   const subscriptionId = synapseConfig.SubscriptionId;
   delete synapseConfig.SubscriptionId;
