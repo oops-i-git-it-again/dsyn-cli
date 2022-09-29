@@ -22,8 +22,14 @@ function packSynapse({
   schemaJson.TableEndpoint = `https://${unpackedEnvironmentJson.StorageAccountName}.table.core.windows.net/`;
   schemaJson.FileEndpoint = `https://${unpackedEnvironmentJson.StorageAccountName}.file.core.windows.net/`;
   schemaJson.FileSystemEndpoint = `https://${unpackedEnvironmentJson.StorageAccountName}.dfs.core.windows.net/`;
-  schemaJson.SqlODEndpoint = `${unpackedEnvironmentJson.WorkspaceName}-ondemand.sql.azuresynapse.net`;
-  schemaJson.WorkspaceDevEndpoint = `https://${unpackedEnvironmentJson.WorkspaceName}.dev.azuresynapse.net`;
+  if (unpackedConfigJson.IncludeWorkspace) {
+    schemaJson.SqlODEndpoint = `${unpackedEnvironmentJson.WorkspaceName}-ondemand.sql.azuresynapse.net`;
+    schemaJson.WorkspaceDevEndpoint = `https://${unpackedEnvironmentJson.WorkspaceName}.dev.azuresynapse.net`;
+  } else {
+    schemaJson.SqlODEndpoint = "";
+    schemaJson.WorkspaceDevEndpoint = "";
+  }
+
   Object.assign(schemaJson, unpackedConfigJson);
   delete schemaJson.IncludeWorkspace;
   const schemaNode = selectSchemaNode(configNode);
