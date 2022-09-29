@@ -1,0 +1,28 @@
+{
+  "IncludeWorkspace": false,
+  "Entities": [
+    {
+      "Type": "account",
+      "PartitionStrategy": "Month",
+      "RecordCountPerBlock": 125,
+      "AppendOnlyMode": false
+    },
+    {
+      "Type": "category",
+      "PartitionStrategy": "Month",
+      "RecordCountPerBlock": 125,
+      "AppendOnlyMode": false
+    },
+    {
+      "Type": "contact",
+      "PartitionStrategy": "Month",
+      "RecordCountPerBlock": 125,
+      "AppendOnlyMode": false
+    }
+  ],
+  "RetryPolicy": { "MaxRetryCount": 12, "IntervalInSeconds": 5 },
+  "DestinationType": "Adls",
+  "WriteDeleteLog": true,
+  "IsOdiEnabled": false,
+  "SchedulerIntervalInMinutes": 60
+}

@@ -4,23 +4,28 @@ const { getTestFiles } = require("./getTestFiles");
 const { packSynapse } = require("./packSynapse");
 
 describe("packSynapse", () => {
-  test("combines single synapse link configuration with synapse workspace into solution", async () => {
-    //Arrange
-    const {
-      packedXml,
-      unpackedConfigJson,
-      unpackedEnvironmentJson,
-      unpackedXml,
-    } = await getTestFiles("single-config-with-synapse");
-
-    //Act
-    const outputXml = packSynapse({
-      unpackedConfigJson: JSON.parse(unpackedConfigJson),
-      unpackedEnvironmentJson: JSON.parse(unpackedEnvironmentJson),
-      unpackedXml,
-    });
-
-    //Assert
-    expect(xml2js(outputXml)).toEqual(xml2js(packedXml));
-  });
+  test("combines single synapse link configuration with synapse workspace into solution", () =>
+    testPackSynapse("single-config-with-synapse"));
+  test("combines single synapse link configuration without synapse workspace into solution", () =>
+    testPackSynapse("single-config-without-synapse"));
 });
+
+async function testPackSynapse(testName) {
+  // Arrange
+  const {
+    packedXml,
+    unpackedConfigJson,
+    unpackedEnvironmentJson,
+    unpackedXml,
+  } = await getTestFiles(testName);
+
+  // Act
+  const outputXml = packSynapse({
+    unpackedConfigJson: JSON.parse(unpackedConfigJson),
+    unpackedEnvironmentJson: JSON.parse(unpackedEnvironmentJson),
+    unpackedXml,
+  });
+
+  // Assert
+  expect(xml2js(outputXml)).toEqual(xml2js(packedXml));
+}
