@@ -10,7 +10,8 @@ describe("unpackSynapse", () => {
     testUnpackSynapse("single-config-without-synapse"));
   test("splits multiple synpase link configurations from solution", () =>
     testUnpackSynapse("multiple-configs"));
-  // TODO: support 0 synapse configs
+  test("outputs empty JSON objects when no link configurations are found", () =>
+    testUnpackSynapse("zero-configs"));
 });
 
 async function testUnpackSynapse(testName) {
