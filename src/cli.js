@@ -20,10 +20,10 @@ program
   .action(async ({ folder, configuration, environmentSettings }) => {
     const customizationsXmlPath = join(folder, "Other", "Customizations.xml");
     const inputXml = (await readFile(customizationsXmlPath)).toString();
-    const { packedXml, unpackedConfigJson, unpackedEnvironmentJson } =
+    const { unpackedXml, unpackedConfigJson, unpackedEnvironmentJson } =
       unpackSynapse(inputXml);
     const promises = [
-      writeFile(customizationsXmlPath, formatXml(packedXml)),
+      writeFile(customizationsXmlPath, formatXml(unpackedXml)),
       writeFile(
         configuration,
         format(JSON.stringify(unpackedConfigJson), { parser: "json" })
