@@ -1,0 +1,46 @@
+{
+  "653ae937-c02f-ed11-9db1-0022482dfdbf": {
+    "IncludeWorkspace": true,
+    "Entities": [
+      {
+        "Type": "account",
+        "PartitionStrategy": "Month",
+        "RecordCountPerBlock": 125,
+        "AppendOnlyMode": false
+      },
+      {
+        "Type": "category",
+        "PartitionStrategy": "Month",
+        "RecordCountPerBlock": 125,
+        "AppendOnlyMode": false
+      },
+      {
+        "Type": "contact",
+        "PartitionStrategy": "Month",
+        "RecordCountPerBlock": 125,
+        "AppendOnlyMode": false
+      }
+    ],
+    "RetryPolicy": { "MaxRetryCount": 12, "IntervalInSeconds": 5 },
+    "DestinationType": "Adls",
+    "WriteDeleteLog": true,
+    "IsOdiEnabled": false,
+    "SchedulerIntervalInMinutes": 60
+  },
+  "9368f9e9-753f-ed11-9db0-000d3a8be5ea": {
+    "IncludeWorkspace": false,
+    "Entities": [
+      {
+        "Type": "account",
+        "PartitionStrategy": "Month",
+        "RecordCountPerBlock": 125,
+        "AppendOnlyMode": false
+      }
+    ],
+    "RetryPolicy": { "MaxRetryCount": 12, "IntervalInSeconds": 5 },
+    "DestinationType": "Adls",
+    "WriteDeleteLog": true,
+    "IsOdiEnabled": false,
+    "SchedulerIntervalInMinutes": 60
+  }
+}
