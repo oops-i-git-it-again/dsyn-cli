@@ -43,7 +43,7 @@ program
   .command("pack")
   .requiredOption("-f, --folder <path>")
   .requiredOption("-c, --configuration <path>")
-  .requiredOption("-e, --environmentSettings <path>")
+  .option("-e, --environmentSettings <path>")
   .action(async ({ folder, configuration, environmentSettings }) => {
     const customizationsXmlPath = join(folder, "Other", "Customizations.xml");
     const [unpackedXml, unpackedConfigJson, unpackedEnvironmentJson] =
@@ -55,7 +55,8 @@ program
     const packedXml = packSynapse({
       unpackedXml,
       unpackedConfigJson: JSON.parse(unpackedConfigJson),
-      unpackedEnvironmentJson: JSON.parse(unpackedEnvironmentJson),
+      unpackedEnvironmentJson:
+        unpackedEnvironmentJson && JSON.parse(unpackedEnvironmentJson),
     });
     await writeFile(customizationsXmlPath, formatXml(packedXml));
   });
