@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,3 +26,22 @@ jobs:
         if: |
           ${{ (success() || failure()) &&
             steps.install.conclusion == 'success' }}
+
+  version-bump:
+    runs-on: ubuntu-latest
+    needs: verify
+    if: ${{ github.ref == 'refs/heads/version-bump' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: phips28/gh-action-bump-version@v9.0.31
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: version-bump
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+      - run: cat ./package.json
