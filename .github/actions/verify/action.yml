@@ -2,9 +2,17 @@ name: verify
 description: >
   ensures that the current npm package passes all tests and linting
    requirements and can build
+inputs:
+  ref:
+    description: branch to verify
+    default: ${{ github.ref }}
 runs:
   using: composite
   steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ inputs.ref }}
+      if: ${{ input.ref != github.ref }}
     - uses: actions/setup-node@v3
       with:
         node-version: 16
