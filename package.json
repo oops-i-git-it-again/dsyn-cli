@@ -18,7 +18,9 @@
     "@xmldom/xmldom": "^0.8.2",
     "commander": "^9.4.0",
     "prettier": "^2.7.1",
-    "xpath": "^0.0.32"
+    "xpath": "^0.0.32",
+    "yauzl": "^2.10.0",
+    "yazl": "^2.5.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.2",

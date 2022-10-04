@@ -1,5 +1,4 @@
-const { join } = require("path");
-const { readFilesFromRoot } = require("./readFilesFromRoot");
+const { readTestFiles } = require("./readTestFiles");
 
 async function getTestFiles(testName) {
   const [packedXml, unpackedXml, unpackedConfigJson, unpackedEnvironmentJson] =
@@ -18,10 +17,3 @@ async function getTestFiles(testName) {
   };
 }
 exports.getTestFiles = getTestFiles;
-
-function readTestFiles(testName, ...fileNames) {
-  return readFilesFromRoot(
-    join(__dirname, "..", "test", testName),
-    ...fileNames
-  );
-}
