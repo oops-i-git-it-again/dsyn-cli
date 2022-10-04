@@ -1,5 +1,5 @@
 const { describe, expect, test } = require("@jest/globals");
-const { xml2js, json2xml } = require("xml-js");
+const { xml2js } = require("xml-js");
 const { getTestFiles } = require("./getTestFiles");
 const { packSynapse } = require("./packSynapse");
 const { readTestFiles } = require("./readTestFiles");
