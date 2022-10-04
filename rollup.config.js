@@ -12,11 +12,14 @@ module.exports = {
   plugins: [shebang(), commonjs()],
   external: [
     "commander",
+    "fs",
     "fs/promises",
     "path",
     "prettier",
     "@prettier/plugin-xml",
     "@xmldom/xmldom",
     "xpath",
+    "yauzl",
+    "yazl",
   ],
 };
