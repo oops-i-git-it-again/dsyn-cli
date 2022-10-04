@@ -17,7 +17,7 @@ describe("injectSynapse", () => {
     // Act
     const outputXml = injectSynapse({
       packedXml: preInjectXml,
-      unpackedEnvironmentJson,
+      unpackedEnvironmentJson: JSON.parse(unpackedEnvironmentJson),
     });
 
     // Assert

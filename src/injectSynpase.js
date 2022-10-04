@@ -13,6 +13,8 @@ function injectSynapse({ packedXml, unpackedEnvironmentJson }) {
       unpackedEnvironmentJson
     );
     const schemaNode = selectSchemaNode(configNode);
+    const configJson = JSON.parse(schemaNode.textContent);
+    Object.assign(schemaJson, configJson);
     schemaNode.textContent = JSON.stringify(schemaJson);
   });
   return serializeXml(dom);
