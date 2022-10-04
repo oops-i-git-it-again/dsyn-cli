@@ -6,8 +6,10 @@ const { join } = require("path");
 const unpackSynapse = require("./unpackSynapse");
 const { format } = require("prettier");
 const pluginXml = require("@prettier/plugin-xml");
+const { injectSynapse } = require("./injectSynpase");
 const { packSynapse } = require("./packSynapse");
 const { readFiles } = require("./readFiles");
+const { zipMap } = require("./zipMap");
 
 const program = new Command();
 program.name("dsyn");
@@ -59,6 +61,19 @@ program
         unpackedEnvironmentJson && JSON.parse(unpackedEnvironmentJson),
     });
     await writeFile(customizationsXmlPath, formatXml(packedXml));
+  });
+
+program
+  .command("inject")
+  .requiredOption("-z, --zipFile <path>")
+  .requiredOption("-e, --environmentSettings <path>")
+  .action(async ({ zipFile, environmentSettings }) => {
+    const unpackedEnvironmentJson = JSON.parse(
+      (await readFile(environmentSettings)).toString()
+    );
+    await zipMap(zipFile, "customizations.xml", (packedXml) =>
+      injectSynapse({ packedXml, unpackedEnvironmentJson })
+    );
   });
 
 program.parse();
