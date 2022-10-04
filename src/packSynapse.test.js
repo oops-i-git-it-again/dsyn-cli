@@ -1,5 +1,5 @@
 const { describe, expect, test } = require("@jest/globals");
-const { xml2js } = require("xml-js");
+const { xml2js, json2xml } = require("xml-js");
 const { getTestFiles } = require("./getTestFiles");
 const { packSynapse } = require("./packSynapse");
 const { readTestFiles } = require("./readTestFiles");
@@ -23,7 +23,10 @@ describe("packSynapse", () => {
     );
 
     // Act
-    const outputXml = packSynapse({ unpackedConfigJson, unpackedXml });
+    const outputXml = packSynapse({
+      unpackedConfigJson: JSON.parse(unpackedConfigJson),
+      unpackedXml,
+    });
 
     // Assert
     expect(xml2js(outputXml)).toEqual(xml2js(packedXml));
