@@ -79,11 +79,11 @@ Commands:
 
 Extracts Synapse Link configuration and environment-level configuration from an unpacked solution folder.
 
-| Parameter                          | Description                                                                                                                                                                           |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-f, --folder <path>`              | **Required.** Path to the folder containing the unpacked solution.                                                                                                                    |
-| `-c, --configuration <path>`       | **Required.** Path to the file containing Synapse Link configuration.                                                                                                                 |
-| `-e, --environmentSettings <path>` | Path to the file containing environment-level configuration. If excluded, environment-level configuration will be removed from Synapse Link configuration, but not saved to the disk. |
+| Parameter                          | Description                                                                                                                                                                                     |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-f, --folder <path>`              | **Required.** Path to the folder containing the unpacked solution.                                                                                                                              |
+| `-c, --configuration <path>`       | **Required.** Path to the file containing Synapse Link configuration.                                                                                                                           |
+| `-e, --environmentSettings <path>` | Path to the file containing environment-level configuration. <br/><br/>If excluded, environment-level configuration will be removed from Synapse Link configuration, but not saved to the disk. |
 
 #### Examples
 
@@ -101,5 +101,28 @@ dsyn unpack `
 ```
 
 ### pack
+
+Inserts Synapse Link configuration and environment-level configuration back into an unpacked solution folder.
+
+| Parameter                          | Description                                                                                                                                                                                                                                                                                                   |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-f, --folder <path>`              | **Required.** Path to the folder containing the unpacked solution.                                                                                                                                                                                                                                            |
+| `-c, --configuration <path>`       | **Required.** Path to the file containing Synapse Link configuration.                                                                                                                                                                                                                                         |
+| `-e, --environmentSettings <path>` | Path to the file containing environment-level configuration. <br/><br/>If excluded, environment-level configuration will not be added to the `Other/Customizations.xml` file. Prior to importing the solution, you must [`inject`](#inject) environment-level configuration into the packed solution archive. |
+
+#### Examples
+
+```powershell
+dsyn pack `
+  -f ./solution `
+  -c ./synapse.config.json `
+  -e ./synapse.dev.json
+```
+
+```powershell
+dsyn pack `
+  -f ./solution `
+  -c ./synapse.config.json
+```
 
 ### inject
