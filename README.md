@@ -32,13 +32,14 @@ Many customers, including the creators of `dsyn-cli`, would like the option to s
 After using [Power Platform CLI](https://learn.microsoft.com/en-us/power-platform/developer/cli/introduction) (or any higher-level wrapper thereof) to unpack a solution, a user or automated service can use `dsyn-cli` to further extract any Synapse Link configuration and environment-level configuration from the unpacked solution into a separate file. Then, an engineer can create additional environment-level configuration for each downstream environment. The resulting folder structure looks something like this:
 
 ```
-|- solution
-|--- Other
-|----- Customizations.xml
-|----- Solution.xml
-|- synapse.config.json
-|- synapse.development.json
-|- synapse.production.json
+.
++-- solution
+|   +-- Other
+|   |   +-- Customizations.xml
+|   |   +-- Solution.xml
++-- synapse.config.json
++-- synapse.development.json
++-- synapse.production.json
 ```
 
 When it comes time to pack the solution for deployment, `dsyn-cli` can be used to combine `synapse.config.json` and `synapse.production.json`\* back into `Customizations.xml` prior to the calling `pac solution pack`.
