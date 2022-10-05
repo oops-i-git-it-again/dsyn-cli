@@ -67,13 +67,16 @@ npm install -g dsyn-cli@latest
 
 Usage: dsyn [options] [command]
 
+Provides a work-around for a current limitation in deployments of Dataverse Synapse Link configurations.
+
 Options:
+  -V, --version     output the version number
   -h, --help        display help for command
 
 Commands:
-  unpack [options]
-  pack [options]
-  inject [options]
+  unpack [options]  Extracts Synapse Link configuration and environment-level configuration from an unpacked solution folder.
+  pack [options]    Inserts Synapse Link configuration and environment-level configuration back into an unpacked solution folder.
+  inject [options]  Modifies a packed solution file (`.zip`) by inserting environment-level configuration into the previously packed Synapse Link configuration(s).
   help [command]    display help for command
 ```
 
