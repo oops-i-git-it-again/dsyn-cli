@@ -2,7 +2,7 @@
 
 Provides a work-around for a current limitation in deployments of Dataverse Synapse Link configurations.
 
-> :warning: `dsyn-cli` is not supported by the Power Platform product group. No contributor to `dsyn-cli` is responsible for any unexpected behavior in your Dataverse environment(s). Use at your own risk.
+> :warning: `dsyn-cli` is not supported by the Power Platform product group. No contributor to `dsyn-cli` is responsible for any unexpected behavior in your Dataverse environment(s). Use at your own risk. We recommend taking additional steps to [mitigate risk](#mitigating-risk).
 
 ## Table of Contents
 
@@ -17,6 +17,7 @@ Provides a work-around for a current limitation in deployments of Dataverse Syna
     - [Examples](#examples-1)
   - [`inject`](#inject)
     - [Example](#example)
+- [Mitigating Risk](#mitigating-risk)
 
 ## Problem
 
@@ -148,3 +149,12 @@ dsyn inject `
   -z ./solution.zip `
   -e ./synapse.production.json
 ```
+
+## Mitigating Risk
+
+As `dsyn-cli` is unsupported, we recommend the following practices:
+
+- Isolate your Synapse Link configuration components into a separate solution from your other data elements.
+- Only import _managed_ solutions into any of your downstream environments (e.g. test and production).
+
+With these practices in place, if you are experiencing unexpected behavior in a downstream environment as a result of using `dsyn-cli`, you can uninstall the managed solution, which will delete any Synapse Link configurations in that environment. Then, you can _manually_ re-create your Synapse Link configurations in that environment.
