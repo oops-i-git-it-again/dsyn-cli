@@ -2,6 +2,18 @@
 
 This tool provides a work-around for a current limitation in deployments of Dataverse Synapse Link configurations.
 
+## Table of Contents
+
+- [Problem](#problem)
+- [Solution](#solution)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [`unpack`](#unpack)
+    - [Examples](#examples)
+  - [`pack`](#pack) - TODO
+  - [`inject`](#inject) - TODO
+
 ## Problem
 
 In November 2021, [Microsoft announced the deprecation of Data Export Service in favor of Synapse Link for Dataverse](https://powerapps.microsoft.com/en-us/blog/do-more-with-data-from-data-export-service-to-azure-synapse-link-for-dataverse/). At the time of creation of this tool, when trying to set up a healthy ALM ecosystem that includes the deployment of Synapse Link configurations, the target environment of each Synapse Link configuration is hard-coded into the solution file.
@@ -28,7 +40,7 @@ When it comes time to pack the solution for deployment, `dsyn-cli` can be used t
 
 (\* Environment-level configuration can be injected directly into a packed zip filer later on; see [inject](#inject).)
 
-## Pre-requisites
+## Prerequisites
 
 - [Node.js](https://nodejs.org/en/)
 
