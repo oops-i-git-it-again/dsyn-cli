@@ -139,7 +139,7 @@ Modifies a packed solution file (`.zip`) by inserting environment-level configur
 #### Example
 
 ```powershell
-dsyn `
+dsyn inject `
   -z ./solution.zip `
   -e ./synapse.production.json
 ```
