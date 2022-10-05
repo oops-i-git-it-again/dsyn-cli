@@ -91,7 +91,7 @@ Extracts Synapse Link configuration and environment-level configuration from an 
 dsyn unpack `
   -f ./solution `
   -c ./synapse.config.json `
-  -e ./synapse.dev.json
+  -e ./synapse.development.json
 ```
 
 ```powershell
@@ -116,7 +116,7 @@ Inserts Synapse Link configuration and environment-level configuration back into
 dsyn pack `
   -f ./solution `
   -c ./synapse.config.json `
-  -e ./synapse.dev.json
+  -e ./synapse.production.json
 ```
 
 ```powershell
@@ -126,3 +126,18 @@ dsyn pack `
 ```
 
 ### inject
+
+Modifies a packed solution file (`.zip`) by inserting environment-level configuration into the previously packed Synapse Link configuration(s).
+
+| Parameter                          | Description                                                                |
+| ---------------------------------- | -------------------------------------------------------------------------- |
+| `-z, --zipFile <path>`             | **Required.** Path to the packed solution archive.                         |
+| `-e, --environmentSettings <path>` | **Required.** Path to the file containing environment-level configuration. |
+
+#### Example
+
+```powershell
+dsyn `
+  -z ./solution.zip `
+  -e ./synapse.production.json
+```
