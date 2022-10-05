@@ -15,7 +15,7 @@ const { EOL } = require("os");
 const program = new Command();
 program
   .name("dsyn")
-  .version(require(join(__dirname, "..", "package.json")).version)
+  .version(process.env.DSYN_CLI_VERSION ?? "dev")
   .description(
     "Provides a work-around for a current limitation in deployments of Dataverse Synapse Link configurations."
   );
