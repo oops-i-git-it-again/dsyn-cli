@@ -1,8 +1,8 @@
 # Dataverse Synapse Link Configuration CLI (dsyn-cli)
 
-This tool provides a work-around for a current limitation in deployments of Dataverse Synapse Link configurations.
+Provides a work-around for a current limitation in deployments of Dataverse Synapse Link configurations.
 
-> :warning: This tool is not supported by the Power Platform product group. No contributor to this tool is responsible for any unexpected behavior in your Dataverse environment(s) as a result of using this tool. Use at your own risk.
+> :warning: `dsyn-cli` is not supported by the Power Platform product group. No contributor to `dsyn-cli` is responsible for any unexpected behavior in your Dataverse environment(s). Use at your own risk.
 
 ## Table of Contents
 
@@ -20,11 +20,11 @@ This tool provides a work-around for a current limitation in deployments of Data
 
 ## Problem
 
-In November 2021, [Microsoft announced the deprecation of Data Export Service in favor of Synapse Link for Dataverse](https://powerapps.microsoft.com/en-us/blog/do-more-with-data-from-data-export-service-to-azure-synapse-link-for-dataverse/). At the time of creation of this tool, when trying to set up a healthy ALM ecosystem that includes the deployment of Synapse Link configurations, the target environment of each Synapse Link configuration is hard-coded into the solution file.
+In November 2021, [Microsoft announced the deprecation of Data Export Service in favor of Synapse Link for Dataverse](https://powerapps.microsoft.com/en-us/blog/do-more-with-data-from-data-export-service-to-azure-synapse-link-for-dataverse/). At the time of creation of `dsyn-cli`, when trying to set up a healthy ALM ecosystem that includes the deployment of Synapse Link configurations, the target environment of each Synapse Link configuration is hard-coded into the solution file.
 
 As a result of this behavior, when orchestrating automated deployments using solutions, all Dataverse environments will point to the same Azure Data Lake Storage Account (as well as the same Synapse Workspace).
 
-Many customers, including the creators of this tool, would like the option to set up dedicated resources for each of our environments.
+Many customers, including the creators of `dsyn-cli`, would like the option to set up dedicated resources for each of our environments.
 
 ## Solution
 
