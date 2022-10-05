@@ -15,18 +15,18 @@ Many customers, including the creators of this tool, would like the option to se
 After using [Power Platform CLI](https://learn.microsoft.com/en-us/power-platform/developer/cli/introduction) (or any higher-level wrapper thereof) to unpack a solution, a user or automated service can use `dsyn-cli` to further extract any Synapse Link configuration and environment-level configuration from the unpacked solution into a separate file. Then, an engineer can create additional environment-level configuration for each downstream environment. The resulting folder structure looks something like this:
 
 ```
-| solution
-|-- Other
-|---- Customizations.xml
-|---- Solution.xml
-| synapse.config.json
-| synapse.development.json
-| synapse.production.json
+|- solution
+|--- Other
+|----- Customizations.xml
+|----- Solution.xml
+|- synapse.config.json
+|- synapse.development.json
+|- synapse.production.json
 ```
 
-When it comes time to pack the solution for deployment, `dsyn-cli` can be used to combine `synapse.config.json` and `synapse.production.json`[\*](#inject-footnote) back into `Customizations.xml` prior to the calling `pac solution pack`.
+When it comes time to pack the solution for deployment, `dsyn-cli` can be used to combine `synapse.config.json` and `synapse.production.json`\* back into `Customizations.xml` prior to the calling `pac solution pack`.
 
-<p id="inject-footnote">(\* Environment-level configuration can be injected directly into a packed zip filer later on; see [`inject`](#inject).)</p>
+(\* Environment-level configuration can be injected directly into a packed zip filer later on; see [inject](#inject).)
 
 ## Pre-requisites
 
@@ -67,13 +67,11 @@ Commands:
 
 Extracts Synapse Link configuration and environment-level configuration from an unpacked solution folder.
 
-If no file path for environment-level configuration is provided, environment-level configuration will be removed from the Synapse Link configuration, but not saved to the disk.
-
-| Parameter                          | Description                                                           |
-| ---------------------------------- | --------------------------------------------------------------------- |
-| `-f, --folder <path>`              | **Required.** Path to the folder containing the unpacked solution.    |
-| `-c, --configuration <path>`       | **Required.** Path to the file containing Synapse Link configuration. |
-| `-e, --environmentSettings <path>` | Path to the file containing environment-level configuration.          |
+| Parameter                          | Description                                                                                                                                                                           |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-f, --folder <path>`              | **Required.** Path to the folder containing the unpacked solution.                                                                                                                    |
+| `-c, --configuration <path>`       | **Required.** Path to the file containing Synapse Link configuration.                                                                                                                 |
+| `-e, --environmentSettings <path>` | Path to the file containing environment-level configuration. If excluded, environment-level configuration will be removed from Synapse Link configuration, but not saved to the disk. |
 
 #### Examples
 
@@ -89,3 +87,7 @@ dsyn unpack `
   -f ./solution `
   -c ./synapse.config.json
 ```
+
+### pack
+
+### inject
