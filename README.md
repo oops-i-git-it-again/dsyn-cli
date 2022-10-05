@@ -2,6 +2,8 @@
 
 This tool provides a work-around for a current limitation in deployments of Dataverse Synapse Link configurations.
 
+> :warning: This tool is not supported by the Power Platform product group. No contributor to this tool is responsible for any unexpected behavior in your Dataverse environment(s) as a result of using this tool. Use at your own risk.
+
 ## Table of Contents
 
 - [Problem](#problem)
