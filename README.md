@@ -11,8 +11,10 @@ This tool provides a work-around for a current limitation in deployments of Data
 - [Usage](#usage)
   - [`unpack`](#unpack)
     - [Examples](#examples)
-  - [`pack`](#pack) - TODO
-  - [`inject`](#inject) - TODO
+  - [`pack`](#pack)
+    - [Examples](#examples-1)
+  - [`inject`](#inject)
+    - [Example](#example)
 
 ## Problem
 
