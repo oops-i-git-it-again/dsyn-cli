@@ -33,13 +33,13 @@ After using [Power Platform CLI](https://learn.microsoft.com/en-us/power-platfor
 
 ```
 .
-+-- solution
-|   +-- Other
-|   |   +-- Customizations.xml
-|   |   +-- Solution.xml
-+-- synapse.config.json
-+-- synapse.development.json
-+-- synapse.production.json
+├── solution
+|   └── Other
+|       ├── Customizations.xml
+|       └── Solution.xml
+├── synapse.config.json
+├── synapse.development.json
+└── synapse.production.json
 ```
 
 When it comes time to pack the solution for deployment, `dsyn-cli` can be used to combine `synapse.config.json` and `synapse.production.json`\* back into `Customizations.xml` prior to the calling `pac solution pack`.
