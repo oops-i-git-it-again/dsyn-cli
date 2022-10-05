@@ -10,15 +10,36 @@ const { injectSynapse } = require("./injectSynpase");
 const { packSynapse } = require("./packSynapse");
 const { readFiles } = require("./readFiles");
 const { zipMap } = require("./zipMap");
+const { EOL } = require("os");
 
 const program = new Command();
-program.name("dsyn");
+program
+  .name("dsyn")
+  .version(require(join(__dirname, "..", "package.json")).version)
+  .description(
+    "Provides a work-around for a current limitation in deployments of Dataverse Synapse Link configurations."
+  );
 
 program
   .command("unpack")
-  .requiredOption("-f, --folder <path>")
-  .requiredOption("-c, --configuration <path>")
-  .option("-e, --environmentSettings <path>")
+  .description(
+    "Extracts Synapse Link configuration and environment-level configuration from an unpacked solution folder."
+  )
+  .requiredOption(
+    "-f, --folder <path>",
+    "Required. Path to the folder containing the unpacked solution."
+  )
+  .requiredOption(
+    "-c, --configuration <path>",
+    "Required. Path to the file containing Synapse Link configuration."
+  )
+  .option(
+    "-e, --environmentSettings <path>",
+    [
+      "Path to the file containing environment-level configuration.",
+      "If excluded, environment-level configuration will be removed from Synapse Link configuration, but not saved to the disk.",
+    ].join(EOL)
+  )
   .action(async ({ folder, configuration, environmentSettings }) => {
     const customizationsXmlPath = join(folder, "Other", "Customizations.xml");
     const inputXml = (await readFile(customizationsXmlPath)).toString();
@@ -43,9 +64,24 @@ program
 
 program
   .command("pack")
-  .requiredOption("-f, --folder <path>")
-  .requiredOption("-c, --configuration <path>")
-  .option("-e, --environmentSettings <path>")
+  .description(
+    "Inserts Synapse Link configuration and environment-level configuration back into an unpacked solution folder."
+  )
+  .requiredOption(
+    "-f, --folder <path>",
+    "Required. Path to the folder containing the unpacked solution."
+  )
+  .requiredOption(
+    "-c, --configuration <path>",
+    "Required. Path to the file containing Synapse Link configuration."
+  )
+  .option(
+    "-e, --environmentSettings <path>",
+    [
+      "Path to the file containing environment-level configuration.",
+      "If excluded, environment-level configuration will not be added to the Other/Customizations.xml file. Prior to importing the solution, you must inject environment-level configuration into the packed solution archive.",
+    ].join(EOL)
+  )
   .action(async ({ folder, configuration, environmentSettings }) => {
     const customizationsXmlPath = join(folder, "Other", "Customizations.xml");
     const [unpackedXml, unpackedConfigJson, unpackedEnvironmentJson] =
@@ -65,8 +101,17 @@ program
 
 program
   .command("inject")
-  .requiredOption("-z, --zipFile <path>")
-  .requiredOption("-e, --environmentSettings <path>")
+  .description(
+    "Modifies a packed solution file (`.zip`) by inserting environment-level configuration into the previously packed Synapse Link configuration(s)."
+  )
+  .requiredOption(
+    "-z, --zipFile <path>",
+    "Required. Path to the packed solution archive."
+  )
+  .requiredOption(
+    "-e, --environmentSettings <path>",
+    "Required. Path to the file containing environment-level configuration."
+  )
   .action(async ({ zipFile, environmentSettings }) => {
     const unpackedEnvironmentJson = JSON.parse(
       (await readFile(environmentSettings)).toString()
