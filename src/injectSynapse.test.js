@@ -1,6 +1,6 @@
 const { describe, expect, test } = require("@jest/globals");
 const { xml2js } = require("xml-js");
-const { injectSynapse } = require("./injectSynpase");
+const { injectSynapse } = require("./injectSynapse");
 const { readTestFiles } = require("./readTestFiles");
 
 describe("injectSynapse", () => {
