@@ -1,9 +1,8 @@
-const { select } = require("xpath");
+import { select } from "xpath";
 
-function selectConfigNodes(dom) {
+export function selectConfigNodes(dom) {
   return select(
     "/ImportExportXml/msdyn_exporttodatalakeconfigs/msdyn_exporttodatalakeconfig",
     dom
   );
 }
-exports.selectConfigNodes = selectConfigNodes;

@@ -4,11 +4,11 @@
   "description": "",
   "main": "dist/cli.js",
   "scripts": {
-    "develop": "jest --watch",
+    "develop": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch",
     "build": "rollup --config",
     "lint": "eslint src",
     "start": "node src/cli.js",
-    "test": "jest"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +23,6 @@
     "yazl": "^2.5.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-replace": "^4.0.0",
     "@types/jest": "^29.0.2",
     "cross-env": "^7.0.3",
@@ -38,5 +37,6 @@
   },
   "files": [
     "dist/*"
-  ]
+  ],
+  "type": "module"
 }

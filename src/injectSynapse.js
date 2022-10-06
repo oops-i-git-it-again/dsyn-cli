@@ -1,10 +1,10 @@
-const { applyEnvironmentConfig } = require("./applyEnvironmentConfig");
-const { parseXml } = require("./parseXml");
-const { selectConfigNodes } = require("./selectConfigNodes");
-const { serializeXml } = require("./serializeXml");
-const { selectSchemaNode } = require("./selectSchemaNode");
+import { applyEnvironmentConfig } from "./applyEnvironmentConfig.js";
+import { parseXml } from "./parseXml.js";
+import { selectConfigNodes } from "./selectConfigNodes.js";
+import { serializeXml } from "./serializeXml.js";
+import { selectSchemaNode } from "./selectSchemaNode.js";
 
-function injectSynapse({ packedXml, unpackedEnvironmentJson }) {
+export function injectSynapse({ packedXml, unpackedEnvironmentJson }) {
   const dom = parseXml(packedXml);
   const configNodes = selectConfigNodes(dom);
   configNodes.forEach((configNode) => {
@@ -14,4 +14,3 @@ function injectSynapse({ packedXml, unpackedEnvironmentJson }) {
   });
   return serializeXml(dom);
 }
-exports.injectSynapse = injectSynapse;

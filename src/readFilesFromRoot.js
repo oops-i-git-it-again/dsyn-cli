@@ -1,7 +1,6 @@
-const { join } = require("path");
-const { readFiles } = require("./readFiles");
+import { join } from "path";
+import { readFiles } from "./readFiles.js";
 
-function readFilesFromRoot(root, ...fileNames) {
+export function readFilesFromRoot(root, ...fileNames) {
   return readFiles(...fileNames.map((fileName) => join(root, fileName)));
 }
-exports.readFilesFromRoot = readFilesFromRoot;

@@ -1,7 +1,7 @@
-const { describe, expect, test } = require("@jest/globals");
-const { getTestFiles } = require("./getTestFiles");
-const { packSynapse } = require("./packSynapse");
-const { readTestFiles } = require("./readTestFiles");
+import { describe, expect, test } from "@jest/globals";
+import { getTestFiles } from "./getTestFiles.js";
+import { packSynapse } from "./packSynapse.js";
+import { readTestFiles } from "./readTestFiles.js";
 
 describe("packSynapse", () => {
   test("combines single synapse link configuration with synapse workspace into solution", () =>

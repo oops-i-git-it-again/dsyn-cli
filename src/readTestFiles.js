@@ -1,10 +1,13 @@
-const { join } = require("path");
-const { readFilesFromRoot } = require("./readFilesFromRoot");
+import { join } from "path";
+import { readFilesFromRoot } from "./readFilesFromRoot.js";
 
-function readTestFiles(testName, ...fileNames) {
+export function readTestFiles(testName, ...fileNames) {
   return readFilesFromRoot(
-    join(__dirname, "..", "test", testName),
+    join(getCurrentDirectory(), "..", "test", testName),
     ...fileNames
   );
 }
-exports.readTestFiles = readTestFiles;
+
+function getCurrentDirectory() {
+  return new URL(import.meta.url).pathname.split("/").slice(0, -1).join("/");
+}

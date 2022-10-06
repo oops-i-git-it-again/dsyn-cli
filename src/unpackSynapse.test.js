@@ -1,6 +1,6 @@
-const { describe, expect, test } = require("@jest/globals");
-const { getTestFiles } = require("./getTestFiles");
-const unpackSynapse = require("./unpackSynapse.js");
+import { describe, expect, test } from "@jest/globals";
+import { getTestFiles } from "./getTestFiles.js";
+import unpackSynapse from "./unpackSynapse.js";
 
 describe("unpackSynapse", () => {
   test("splits single synapse link configuration with synapse workspace from solution", () =>
@@ -27,10 +27,8 @@ async function testUnpackSynapse(testName) {
   //  Assert
   expect(output).toHaveProperty("unpackedXml");
   expect(output.unpackedXml).toMatchCustomizationsXml(unpackedXml);
-
   expect(output).toHaveProperty("unpackedConfigJson");
   expect(output.unpackedConfigJson).toEqual(JSON.parse(unpackedConfigJson));
-
   expect(output).toHaveProperty("unpackedEnvironmentJson");
   expect(output.unpackedEnvironmentJson).toEqual(
     JSON.parse(unpackedEnvironmentJson)

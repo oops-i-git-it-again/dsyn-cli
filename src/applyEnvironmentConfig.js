@@ -1,8 +1,8 @@
-const { getConfigId } = require("./getConfigId");
-const { selectNameNode } = require("./selectNameNode");
-const { selectSchemaNode } = require("./selectSchemaNode");
+import { getConfigId } from "./getConfigId.js";
+import { selectNameNode } from "./selectNameNode.js";
+import { selectSchemaNode } from "./selectSchemaNode.js";
 
-function applyEnvironmentConfig(
+export function applyEnvironmentConfig(
   configNode,
   unpackedEnvironmentJson,
   synapseConfig
@@ -32,4 +32,3 @@ function applyEnvironmentConfig(
   const schemaNode = selectSchemaNode(configNode);
   schemaNode.textContent = JSON.stringify(schemaJson);
 }
-exports.applyEnvironmentConfig = applyEnvironmentConfig;

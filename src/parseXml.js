@@ -1,8 +1,7 @@
-const { DOMParser } = require("@xmldom/xmldom");
+import { DOMParser } from "@xmldom/xmldom";
 
-function parseXml(customizationsXml) {
+export function parseXml(customizationsXml) {
   const parser = new DOMParser();
   const dom = parser.parseFromString(customizationsXml);
   return dom;
 }
-exports.parseXml = parseXml;

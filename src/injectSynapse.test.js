@@ -1,6 +1,6 @@
-const { describe, expect, test } = require("@jest/globals");
-const { injectSynapse } = require("./injectSynapse");
-const { readTestFiles } = require("./readTestFiles");
+import { describe, expect, test } from "@jest/globals";
+import { injectSynapse } from "./injectSynapse.js";
+import { readTestFiles } from "./readTestFiles.js";
 
 describe("injectSynapse", () => {
   test("injects environment information to a packed XML file", async () => {

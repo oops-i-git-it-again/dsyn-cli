@@ -1,25 +1,29 @@
-const { getConfigId } = require("./getConfigId");
-const { parseXml } = require("./parseXml");
-const { selectConfigNodes } = require("./selectConfigNodes");
-const { selectNameNode } = require("./selectNameNode");
-const { selectSchemaNode } = require("./selectSchemaNode");
-const { serializeXml } = require("./serializeXml");
+import { getConfigId } from "./getConfigId.js";
+import { parseXml } from "./parseXml.js";
+import { selectConfigNodes } from "./selectConfigNodes.js";
+import { selectNameNode } from "./selectNameNode.js";
+import { selectSchemaNode } from "./selectSchemaNode.js";
+import { serializeXml } from "./serializeXml.js";
 
-module.exports = function unpackSynapse(customizationsXml) {
+export default (function unpackSynapse(customizationsXml) {
   const dom = parseXml(customizationsXml);
   const configNodes = selectConfigNodes(dom);
   const unpackedConfigJson = {};
   const unpackedEnvironmentJson = {};
+
   configNodes.forEach((configNode) => {
     const configId = getConfigId(configNode);
+
     const nameNode = selectNameNode(configNode);
     nameNode.removeChild(nameNode.firstChild);
+
     const jsonNode = selectSchemaNode(configNode);
     const synapseConfig = Object.assign(
       { IncludeWorkspace: null },
       JSON.parse(jsonNode.textContent)
     );
     jsonNode.removeChild(jsonNode.firstChild);
+
     const subscriptionId = synapseConfig.SubscriptionId;
     delete synapseConfig.SubscriptionId;
     const resourceGroupName = synapseConfig.ResourceGroupName;
@@ -32,11 +36,13 @@ module.exports = function unpackSynapse(customizationsXml) {
     delete synapseConfig.FileEndpoint;
     delete synapseConfig.FileSystemEndpoint;
     delete synapseConfig.SqlODEndpoint;
+
     const environmentConfig = {
       ResourceGroupName: resourceGroupName,
       SubscriptionId: subscriptionId,
       StorageAccountName: storageAccountName,
     };
+
     if (synapseConfig.WorkspaceDevEndpoint === "") {
       synapseConfig.IncludeWorkspace = false;
     } else {
@@ -46,13 +52,14 @@ module.exports = function unpackSynapse(customizationsXml) {
       ).hostname.split(".")[0];
     }
     delete synapseConfig.WorkspaceDevEndpoint;
+
     unpackedConfigJson[configId] = synapseConfig;
     unpackedEnvironmentJson[configId] = environmentConfig;
   });
-  const unpackedXml = serializeXml(dom);
+
   return {
-    unpackedXml,
+    unpackedXml: serializeXml(dom),
     unpackedConfigJson,
     unpackedEnvironmentJson,
   };
-};
+});

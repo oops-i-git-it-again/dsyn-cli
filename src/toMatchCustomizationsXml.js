@@ -1,11 +1,11 @@
-const { expect } = require("@jest/globals");
-const { EOL } = require("os");
-const { xml2js } = require("xml-js");
-const { default: matchers } = require("expect/build/matchers");
+import { expect } from "@jest/globals";
+import { EOL } from "os";
+import { xml2js } from "xml-js";
+import matchers from "expect/build/matchers";
 
 expect.extend({
   toMatchCustomizationsXml: (received, expected) =>
-    matchers.toEqual(
+    matchers.default.toEqual(
       parseXml(received, "received"),
       parseXml(expected, "expected")
     ),

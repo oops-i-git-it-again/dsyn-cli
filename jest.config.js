@@ -1,3 +1,7 @@
 /** @type {import("jest").Config} */
-const config = { setupFilesAfterEnv: ["./src/toMatchCustomizationsXml.js"] };
-module.exports = config;
+const config = {
+  watchPathIgnorePatterns: ["<rootDir>/node_modules/"],
+  setupFilesAfterEnv: ["./src/toMatchCustomizationsXml.js"],
+  transform: {},
+};
+export default config;

@@ -1,6 +1,6 @@
-const { readFile } = require("fs/promises");
+import { readFile } from "fs/promises";
 
-function readFiles(...filePaths) {
+export function readFiles(...filePaths) {
   return Promise.all(
     filePaths.map(async (filePath) => {
       if (!filePath) return;
@@ -9,4 +9,3 @@ function readFiles(...filePaths) {
     })
   );
 }
-exports.readFiles = readFiles;

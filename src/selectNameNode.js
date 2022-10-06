@@ -1,6 +1,5 @@
-const { select } = require("xpath");
+import { select } from "xpath";
 
-function selectNameNode(configNode) {
+export function selectNameNode(configNode) {
   return select("./msdyn_name", configNode)[0];
 }
-exports.selectNameNode = selectNameNode;

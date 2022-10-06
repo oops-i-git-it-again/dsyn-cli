@@ -1,6 +1,6 @@
-const { readTestFiles } = require("./readTestFiles");
+import { readTestFiles } from "./readTestFiles.js";
 
-async function getTestFiles(testName) {
+export async function getTestFiles(testName) {
   const [packedXml, unpackedXml, unpackedConfigJson, unpackedEnvironmentJson] =
     await readTestFiles(
       testName,
@@ -16,4 +16,3 @@ async function getTestFiles(testName) {
     unpackedEnvironmentJson,
   };
 }
-exports.getTestFiles = getTestFiles;

@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-const { Command } = require("commander");
-const { readFile, writeFile } = require("fs/promises");
-const { join } = require("path");
-const unpackSynapse = require("./unpackSynapse");
-const { format } = require("prettier");
-const pluginXml = require("@prettier/plugin-xml");
-const { injectSynapse } = require("./injectSynapse");
-const { packSynapse } = require("./packSynapse");
-const { readFiles } = require("./readFiles");
-const { zipMap } = require("./zipMap");
-const { EOL } = require("os");
+import { Command } from "commander";
+import { readFile, writeFile } from "fs/promises";
+import { join } from "path";
+import unpackSynapse from "./unpackSynapse.js";
+import { format } from "prettier";
+import pluginXml from "@prettier/plugin-xml";
+import { injectSynapse } from "./injectSynapse.js";
+import { packSynapse } from "./packSynapse.js";
+import { readFiles } from "./readFiles.js";
+import { zipMap } from "./zipMap.js";
+import { EOL } from "os";
 
 const program = new Command();
 program

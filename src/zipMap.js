@@ -1,8 +1,8 @@
-const { createWriteStream } = require("fs");
-const { ZipFile } = require("yazl");
-const { open } = require("yauzl");
+import { createWriteStream } from "fs";
+import { ZipFile } from "yazl";
+import { open } from "yauzl";
 
-async function zipMap(zipPath, filePath, mapper) {
+export async function zipMap(zipPath, filePath, mapper) {
   const newZip = new ZipFile();
   await new Promise((resolve, reject) => {
     open(zipPath, { lazyEntries: true }, (error, oldZip) => {
@@ -47,4 +47,3 @@ async function zipMap(zipPath, filePath, mapper) {
     newZip.end();
   });
 }
-exports.zipMap = zipMap;
