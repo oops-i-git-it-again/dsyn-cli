@@ -1,7 +1,12 @@
 const { getConfigId } = require("./getConfigId");
 const { selectNameNode } = require("./selectNameNode");
+const { selectSchemaNode } = require("./selectSchemaNode");
 
-function applyEnvironmentConfig(configNode, unpackedEnvironmentJson) {
+function applyEnvironmentConfig(
+  configNode,
+  unpackedEnvironmentJson,
+  synapseConfig
+) {
   const nameNode = selectNameNode(configNode);
   const configId = getConfigId(configNode);
   const environmentConfig = unpackedEnvironmentJson[configId];
@@ -15,13 +20,16 @@ function applyEnvironmentConfig(configNode, unpackedEnvironmentJson) {
   schemaJson.TableEndpoint = `https://${environmentConfig.StorageAccountName}.table.core.windows.net/`;
   schemaJson.FileEndpoint = `https://${environmentConfig.StorageAccountName}.file.core.windows.net/`;
   schemaJson.FileSystemEndpoint = `https://${environmentConfig.StorageAccountName}.dfs.core.windows.net/`;
-  if (environmentConfig.WorkspaceName) {
+  if (synapseConfig.IncludeWorkspace) {
     schemaJson.SqlODEndpoint = `${environmentConfig.WorkspaceName}-ondemand.sql.azuresynapse.net`;
     schemaJson.WorkspaceDevEndpoint = `https://${environmentConfig.WorkspaceName}.dev.azuresynapse.net`;
   } else {
     schemaJson.SqlODEndpoint = "";
     schemaJson.WorkspaceDevEndpoint = "";
   }
-  return schemaJson;
+  delete synapseConfig.IncludeWorkspace;
+  Object.assign(schemaJson, synapseConfig);
+  const schemaNode = selectSchemaNode(configNode);
+  schemaNode.textContent = JSON.stringify(schemaJson);
 }
 exports.applyEnvironmentConfig = applyEnvironmentConfig;

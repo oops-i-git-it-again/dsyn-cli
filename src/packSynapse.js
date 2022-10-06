@@ -15,14 +15,16 @@ function packSynapse({
   configNodes.forEach((configNode) => {
     const configId = getConfigId(configNode);
     const synapseConfig = unpackedConfigJson[configId];
-    const schemaJson = unpackedEnvironmentJson
-      ? applyEnvironmentConfig(configNode, unpackedEnvironmentJson)
-      : {};
-
-    Object.assign(schemaJson, synapseConfig);
-    delete schemaJson.IncludeWorkspace;
-    const schemaNode = selectSchemaNode(configNode);
-    schemaNode.textContent = JSON.stringify(schemaJson);
+    if (unpackedEnvironmentJson) {
+      applyEnvironmentConfig(
+        configNode,
+        unpackedEnvironmentJson,
+        synapseConfig
+      );
+    } else {
+      const schemaNode = selectSchemaNode(configNode);
+      schemaNode.textContent = JSON.stringify(synapseConfig);
+    }
   });
   return serializeXml(dom);
 }
