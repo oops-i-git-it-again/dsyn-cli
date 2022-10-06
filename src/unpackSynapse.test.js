@@ -1,5 +1,4 @@
 const { describe, expect, test } = require("@jest/globals");
-const { xml2js } = require("xml-js");
 const { getTestFiles } = require("./getTestFiles");
 const unpackSynapse = require("./unpackSynapse.js");
 
@@ -27,7 +26,7 @@ async function testUnpackSynapse(testName) {
 
   //  Assert
   expect(output).toHaveProperty("unpackedXml");
-  expect(xml2js(output.unpackedXml)).toEqual(xml2js(unpackedXml));
+  expect(output.unpackedXml).toMatchCustomizationsXml(unpackedXml);
 
   expect(output).toHaveProperty("unpackedConfigJson");
   expect(output.unpackedConfigJson).toEqual(JSON.parse(unpackedConfigJson));
