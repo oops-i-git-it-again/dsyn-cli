@@ -1,6 +1,5 @@
 const { describe, expect, test } = require("@jest/globals");
-const { xml2js } = require("xml-js");
-const { injectSynapse } = require("./injectSynapse");
+const { injectSynapse } = require("./injectSynpase");
 const { readTestFiles } = require("./readTestFiles");
 
 describe("injectSynapse", () => {
@@ -21,6 +20,6 @@ describe("injectSynapse", () => {
     });
 
     // Assert
-    expect(xml2js(outputXml)).toEqual(xml2js(postInjectXml));
+    expect(outputXml).toMatchCustomizationsXml(postInjectXml);
   });
 });

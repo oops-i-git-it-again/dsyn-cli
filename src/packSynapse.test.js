@@ -1,5 +1,4 @@
 const { describe, expect, test } = require("@jest/globals");
-const { xml2js } = require("xml-js");
 const { getTestFiles } = require("./getTestFiles");
 const { packSynapse } = require("./packSynapse");
 const { readTestFiles } = require("./readTestFiles");
@@ -29,7 +28,7 @@ describe("packSynapse", () => {
     });
 
     // Assert
-    expect(xml2js(outputXml)).toEqual(xml2js(packedXml));
+    expect(outputXml).toMatchCustomizationsXml(packedXml);
   });
 });
 
@@ -50,5 +49,5 @@ async function testPackSynapse(testName) {
   });
 
   // Assert
-  expect(xml2js(outputXml)).toEqual(xml2js(packedXml));
+  expect(outputXml).toMatchCustomizationsXml(packedXml);
 }
