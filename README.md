@@ -1,6 +1,6 @@
 # Dataverse Synapse Link Configuration CLI (dsyn-cli)
 
-Provides a work-around for a current limitation in deployments of Dataverse Synapse Link configurations.
+Provides a work-around for a [current limitation](https://github.com/MicrosoftDocs/powerapps-docs/issues/3503) in deployments of Dataverse Synapse Link configurations.
 
 > :warning: `dsyn-cli` is not supported by the Power Platform product group. No contributor to `dsyn-cli` is responsible for any unexpected behavior in your Dataverse environment(s). Use at your own risk. We recommend taking additional steps to [mitigate risk](#mitigating-risk).
 
