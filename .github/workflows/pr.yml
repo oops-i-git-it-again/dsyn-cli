@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: oops-i-git-it-again/actions/.github/actions/npm_verify@main
+      - uses: oops-i-git-it-again/actions/npm_verify@main
         with:
           ref: ${{ github.head_ref }}
